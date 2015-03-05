@@ -2,23 +2,59 @@
 <html>
 
 	<head>
-		<title> Cat Clicker!!! (jQuery) </title>
+		<title> Cat Clicker!!! (Vanilla JS) </title>
+
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+		<!-- Latest compiled and minified JavaScript -->
 		<script type="text/javascript" src="js/jQuery.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="css/catclicker.css">
 	</head>
 
 	<body>
 
-	<div id="cat1">
-		Say HI! to <span class="cat-1-name"></span>!!!
-		<img id="cat-pic-1" src="images/cat.jpg">
-		You clicked on <span class="cat-1-name"></span> <span id="cat-1-clicks"> 0 </span> times.
-	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3" id="cat-picker">
+				<div class="cat-thumbnail" id="cat1">
+					<span class="cat-name-header"></span>
+					<img class="img-responsive cat-thumbnail-pic" id="cat-1-pic" src="http://placekitten.com/g/100/100">
+					You clicked on <span class="cat-name-main"></span> <span id="cat-1-clicks"> 0 </span> times.
+				</div>
 
-	<div id="cat2">
-		Say HI! to <span class="cat-2-name"></span>!!!
-		<img id="cat-pic-2" src="images/cat2.jpg">
-		You clicked on <span class="cat-2-name"></span> <span id="cat-2-clicks"> 0 </span> times.
-	</div>	
+				<div class="cat-thumbnail" id="cat2">
+					<span class="cat-name-header"></span>
+					<img class="img-responsive cat-thumbnail-pic" id="cat-2-pic" src="http://placekitten.com/g/200/200">
+					You clicked on <span class="cat-name-main"></span> <span id="cat-2-clicks"> 0 </span> times.
+				</div>
+
+				<div class="cat-thumbnail" id="cat3">
+					<span class="cat-name-header"></span>
+					<img class="img-responsive cat-thumbnail-pic" id="cat-3-pic" src="http://placekitten.com/g/300/300">
+					You clicked on <span class="cat-name-main"></span> <span id="cat-3-clicks"> 0 </span> times.
+				</div>
+
+				<div class="cat-thumbnail" id="cat4">
+					<span class="cat-name-header"></span>
+					<img class="img-responsive cat-thumbnail-pic" id="cat-4-pic" src="http://placekitten.com/g/400/400">
+					You clicked on <span class="cat-name-main"></span> <span id="cat-4-clicks"> 0 </span> times.
+				</div>
+
+				<div class="cat-thumbnail" id="cat5">
+					<span class="cat-name-header"></span>
+					<img class="img-responsive cat-thumbnail-pic" id="cat-5-pic" src="http://placekitten.com/g/500/500">
+					You clicked on <span class="cat-name-main"></span> <span id="cat-5-clicks"> 0 </span> times.
+				</div>
+			</div>
+			<div class="col-md-9" id="cat-dislpay">
+				<img class="img-responsive cat-display-pic" id="cat-display-pic" src="http://placekitten.com/g/500/500">
+			</div>
+		</div>
+	</div>
+		
 
 	<script type="text/javascript" src="js/catclickerjQuery.js"></script>
 

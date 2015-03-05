@@ -1,0 +1,22 @@
+
+.cat-thumbnail
+{
+	padding-bottom: 15px;
+}
+
+.cat-thumbnail-pic
+{
+	width: 100px;
+	height: 100px;
+}
+
+.cat-display-pic
+{
+	width: 500px;
+	height: 500px;
+}
+
+.cat-name-header
+{
+	font-weight: bold;
+}
