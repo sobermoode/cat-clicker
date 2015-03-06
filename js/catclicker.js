@@ -1,9 +1,14 @@
 
 $( function()
 	{
+		// the model contains all the data to insert into the HTML
 		var model =
 		{
+			// start with an empty array
 			cats: [],
+
+			// hard-code data for each cat and
+			// add each cat object to the cats[] array
 			init: function()
 			{
 				this.cats.push(
@@ -64,6 +69,7 @@ $( function()
 			}
 		};
 
+		// the octopus initializes the model and the views
 		var octopus =
 		{
 			init: function()
@@ -73,13 +79,20 @@ $( function()
 			}
 		};
 
+		// the views are the list of cats and their thumbnails, their click counts, and
+		// the large picture that appears when you click on one
 		var view =
 		{
+			// insert all the data into the HTML
 			init: function()
 			{
 				for( var i = 0; i < model.cats.length; i++ )
 				{
+					document.getElementById( "cat-" + i + "-name-header" ).innerHTML = model.cats[ i ].name;
+					document.getElementById( "cat-" + i + "-name-main" ).innerHTML = model.cats[ i ].name;
 					document.getElementById( "cat-" + i + "-pic" ).src = model.cats[ i ].imageSrc;
+
+					// the event listener updates the model and renders the updated content
 					document.getElementById( "cat-" + i + "-pic" ).addEventListener( "click", ( function( catIDCopy )
 						{
 							return function()
@@ -94,6 +107,7 @@ $( function()
 				}
 			},
 
+			// insert updated model data into the HTML
 			render: function( catIDCopy )
 			{
 				document.getElementById( "cat-" + catIDCopy + "-clicks" ).innerHTML = model.cats[ catIDCopy ].clickCount;
@@ -101,6 +115,7 @@ $( function()
 			}
 		};
 
+		// initialize the octopus to get everything started
 		octopus.init();
 	}
 );
