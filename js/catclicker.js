@@ -1,86 +1,106 @@
 
-// counters for each cat
-var cat1ClickCount = 0,
-	cat2ClickCount = 0,
-	cat3ClickCount = 0,
-	cat4ClickCount = 0,
-	cat5ClickCount = 0;
-
-// names for each cat
-var catNames =
-[
-	"Garfield",
-	"Heathcliff",
-	"Lorraine",
-	"Tigger",
-	"Hobbes"
-];
-
-// get the image associated with each cat
-var cat1Pic = document.getElementById( "cat-1-pic" );
-var cat2Pic = document.getElementById( "cat-2-pic" );
-var cat3Pic = document.getElementById( "cat-3-pic" );
-var cat4Pic = document.getElementById( "cat-4-pic" );
-var cat5Pic = document.getElementById( "cat-5-pic" );
-var catDisplayPic = document.getElementById( "cat-display-pic" );
-
-// get the spans where each cat's name appears
-var catNameHeaders = document.getElementsByClassName( "cat-name-header" );
-var catNameMains = document.getElementsByClassName( "cat-name-main" );
-
-// assign all instances of each cat's name
-for( var i = 0; i < catNames.length; i++ )
-{
-	catNameHeaders[ i ].innerHTML = catNames[ i ];
-	catNameMains[ i ].innerHTML = catNames[ i ];
-}
-
-// get the span where the number of clicks is updated
-var clickText1 = document.getElementById( "cat-1-clicks" );
-var clickText2 = document.getElementById( "cat-2-clicks" );
-var clickText3 = document.getElementById( "cat-3-clicks" );
-var clickText4 = document.getElementById( "cat-4-clicks" );
-var clickText5 = document.getElementById( "cat-5-clicks" );
-
-// assign event listeners to each image
-// when the thumbnail is clicked, the counter increases,
-// and the main display will show a big pic of the cliced cat
-cat1Pic.addEventListener( "click", function()
+$( function()
 	{
-		catDisplayPic.src = cat1Pic.src;
-		clickText1.innerHTML = ++cat1ClickCount;
-	},
-	false
-);
+		var model =
+		{
+			cats: [],
+			init: function()
+			{
+				this.cats.push(
+					{
+						name: "Garfield",
+						imageSrc: "images/cat1.jpg",
+						imageElement: document.getElementById( "cat-0-pic" ),
+						nameHeaderElement: document.getElementById( "cat-0-name-header" ),
+						nameMainElement: document.getElementById( "cat-0-name-main" ),
+						clickCountElement: document.getElementById( "cat-0-clicks" ),
+						clickCount: 0
+					}
+				);
+				this.cats.push(
+					{
+						name: "Heathcliff",
+						imageSrc: "images/cat2.jpg",
+						imageElement: document.getElementById( "cat-1-pic" ),
+						nameHeaderElement: document.getElementById( "cat-1-name-header" ),
+						nameMainElement: document.getElementById( "cat-1-name-main" ),
+						clickCountElement: document.getElementById( "cat-1-clicks" ),
+						clickCount: 0
+					}
+				);
+				this.cats.push(
+					{
+						name: "Lorraine",
+						imageSrc: "images/cat3.jpg",
+						imageElement: document.getElementById( "cat-2-pic" ),
+						nameHeaderElement: document.getElementById( "cat-2-name-header" ),
+						nameMainElement: document.getElementById( "cat-2-name-main" ),
+						clickCountElement: document.getElementById( "cat-2-clicks" ),
+						clickCount: 0
+					}
+				);
+				this.cats.push(
+					{
+						name: "Tigger",
+						imageSrc: "images/cat4.jpg",
+						imageElement: document.getElementById( "cat-3-pic" ),
+						nameHeaderElement: document.getElementById( "cat-3-name-header" ),
+						nameMainElement: document.getElementById( "cat-3-name-main" ),
+						clickCountElement: document.getElementById( "cat-3-clicks" ),
+						clickCount: 0
+					}
+				);
+				this.cats.push(
+					{
+						name: "Hobbes",
+						imageSrc: "images/cat5.jpg",
+						imageElement: document.getElementById( "cat-4-pic" ),
+						nameHeaderElement: document.getElementById( "cat-4-name-header" ),
+						nameMainElement: document.getElementById( "cat-4-name-main" ),
+						clickCountElement: document.getElementById( "cat-4-clicks" ),
+						clickCount: 0
+					}
+				);
+			}
+		};
 
-cat2Pic.addEventListener( "click", function()
-	{
-		catDisplayPic.src = cat2Pic.src;
-		clickText2.innerHTML = ++cat2ClickCount;
-	},
-	false
-);
+		var octopus =
+		{
+			init: function()
+			{
+				model.init();
+				view.init();
+			}
+		};
 
-cat3Pic.addEventListener( "click", function()
-	{
-		catDisplayPic.src = cat3Pic.src;
-		clickText3.innerHTML = ++cat3ClickCount;
-	},
-	false
-);
+		var view =
+		{
+			init: function()
+			{
+				for( var i = 0; i < model.cats.length; i++ )
+				{
+					document.getElementById( "cat-" + i + "-pic" ).src = model.cats[ i ].imageSrc;
+					document.getElementById( "cat-" + i + "-pic" ).addEventListener( "click", ( function( catIDCopy )
+						{
+							return function()
+							{
+								++model.cats[ catIDCopy ].clickCount;
+								view.render( catIDCopy );
+							};
+						}
+						)( i )
+					);
+					document.getElementById( "cat-" + i + "-clicks" ).innerHTML = model.cats[ i ].clickCount;
+				}
+			},
 
-cat4Pic.addEventListener( "click", function()
-	{
-		catDisplayPic.src = cat4Pic.src;
-		clickText4.innerHTML = ++cat4ClickCount;
-	},
-	false
-);
+			render: function( catIDCopy )
+			{
+				document.getElementById( "cat-" + catIDCopy + "-clicks" ).innerHTML = model.cats[ catIDCopy ].clickCount;
+				document.getElementById( "cat-display-pic" ).src = model.cats[ catIDCopy ].imageSrc;
+			}
+		};
 
-cat5Pic.addEventListener( "click", function()
-	{
-		catDisplayPic.src = cat5Pic.src;
-		clickText5.innerHTML = ++cat5ClickCount;
-	},
-	false
+		octopus.init();
+	}
 );
