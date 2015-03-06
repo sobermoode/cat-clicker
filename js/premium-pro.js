@@ -30,6 +30,7 @@ var model =
 			clickCount: 0
 		}
 	],
+	adminControlsAreHidden: true,
 	setCurrentCat: function( cat )
 	{
 		this.currentCat = cat;
@@ -45,6 +46,16 @@ var octopus =
 	init: function()
 	{
 		view.init();
+	},
+	updateCat: function( newName, newURL, newClicks )
+	{
+		model.cats[ model.currentCat ].name = ( newName !== "" ) ? newName : model.cats[ model.currentCat ].name;
+		model.cats[ model.currentCat ].imageSrc = ( newURL !== "" ) ? newURL : model.cats[ model.currentCat ].imageSrc;
+		model.cats[ model.currentCat ].clickCount = ( newClicks !== "" ) ? newClicks : model.cats[ model.currentCat ].clickCount;
+	},
+	getCat: function( catNumber )
+	{
+		return model.cats[ catNumber ];
 	}
 };
 
@@ -68,7 +79,6 @@ var view =
 					return function()
 					{
 						model.setCurrentCat( iCopy );
-						console.log( model.cats[ model.currentCat ] );
 						view.catImageElement.src = model.cats[ model.currentCat ].imageSrc;
 						view.render();
 					};
@@ -78,10 +88,33 @@ var view =
 
 		this.catImageElement.src = ( model.getCurrentCat() ).imageSrc;
 		this.catImageElement.addEventListener( "click", function()
-		{
-			model.cats[ model.currentCat ].clickCount++;
-			view.render();
-		});
+			{
+				model.cats[ model.currentCat ].clickCount++;
+				view.render();
+			}
+		);
+
+		document.getElementById( "admin-button" ).addEventListener( "click", function()
+			{
+				model.adminControlsAreHidden = false;
+				view.render();
+			}
+		);
+
+		document.getElementById( "admin-cancel-button" ).addEventListener( "click", function()
+			{
+				model.adminControlsAreHidden = true;
+				view.render();
+			}
+		);
+
+		document.getElementById( "admin-save-button" ).addEventListener( "click", function()
+			{
+				octopus.updateCat( document.getElementById( "admin-name-box" ).value, document.getElementById( "admin-imageURL-box" ).value, document.getElementById( "admin-clicks-box" ).value );
+				model.adminControlsAreHidden = true;
+				view.render();
+			}
+		);
 
 		document.getElementById( "admin-controls" ).style.visibility = "hidden";
 
@@ -89,7 +122,22 @@ var view =
 	},
 	render: function()
 	{
-		this.catClicksElement.innerHTML = ( model.getCurrentCat() ).clickCount;	
+		for( var i = 0; i < this.catListElement.children.length; i++ )
+		{
+			this.catListElement.children[ i ].innerHTML = octopus.getCat( i ).name;
+		}
+		this.catImageElement.src = ( model.getCurrentCat() ).imageSrc;
+		this.catClicksElement.innerHTML = ( model.getCurrentCat() ).clickCount;
+		if( !model.adminControlsAreHidden )
+		{
+			document.getElementById( "admin-controls" ).style.visibility = "";
+			model.adminControlsAreHidden = false;
+		}
+		else
+		{
+			document.getElementById( "admin-controls" ).style.visibility = "hidden";
+			model.adminControlsAreHidden = true;
+		}
 	}
 };
 
